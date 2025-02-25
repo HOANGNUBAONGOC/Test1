@@ -53,10 +53,10 @@ data class Product(
 @Composable
 fun getSampleProducts(): List<Product> {
     return listOf(
-        Product(1, "Product 1", "$10.00", painterResource(id = R.drawable.ao), "★★★★☆", "A high-quality product with great value."),
-        Product(2, "Product 2", "$20.00", painterResource(id = R.drawable.ao), "★★★☆☆", "This product offers decent performance."),
-        Product(3, "Product 3", "$30.00", painterResource(id = R.drawable.ao), "★★★★★", "A premium product with excellent quality."),
-        Product(4, "Product 4", "$40.00", painterResource(id = R.drawable.ao), "★★☆☆☆", "Basic features at an affordable price.")
+        Product(1, "ÁO THUN MIXECO ", "130 000 vnđ", painterResource(id = R.drawable.ao), "⭐⭐⭐", "Áo thun basic thích hợp cho cả nam và nữ."),
+        Product(2, "VÁY DỰ TIỆC MICASA", "250 000 vnđ", painterResource(id = R.drawable.d3), "⭐⭐⭐", "Váy micasa trong bộ sưu tập mới mang phong cách thanh lịch, trưởng thành và đầy nữ tính."),
+        Product(3, "kHOÁC JEAN", "150 000 vnđ", painterResource(id = R.drawable.akh2), "⭐⭐⭐⭐⭐", "Khoác jean basic, phù hợp với mọi phong cách."),
+        Product(4, "QUẦN SHORT LỬNG", "180 000 vnđ", painterResource(id = R.drawable.qn2), "⭐⭐⭐", "Short lửng độc đáo, đầy cá tính.")
     )
 }
 
@@ -64,6 +64,18 @@ fun getSampleProducts(): List<Product> {
 fun ProductListScreen(onProductClick: (Product) -> Unit) {
     val products = getSampleProducts()
     LazyColumn(modifier = Modifier.padding(16.dp)) {
+        item {
+            Text(
+                text = "New Arrivals",
+                style = MaterialTheme.typography.headlineSmall,
+                color = Color.Black,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 12.dp)
+                    .background(Color(0xFFEFB8C8), shape = RoundedCornerShape(8.dp))
+                    .padding(16.dp)
+            )
+        }
         items(products) { product ->
             ProductItem(product = product, onClick = { onProductClick(product) })
         }
@@ -86,13 +98,13 @@ fun ProductItem(product: Product, onClick: () -> Unit) {
                 painter = product.image,
                 contentDescription = null,
                 modifier = Modifier
-                    .size(80.dp)
+                    .size(110.dp)
                     .clip(RoundedCornerShape(12.dp))
             )
             Spacer(modifier = Modifier.width(12.dp))
             Column {
                 Text(text = product.name, style = MaterialTheme.typography.titleMedium)
-                Text(text = product.rating, style = MaterialTheme.typography.bodySmall.copy(fontSize = 14.sp))
+                Text(text = product.rating, style = MaterialTheme.typography.bodySmall.copy(fontSize = 20.sp))
                 Text(text = product.price, style = MaterialTheme.typography.bodyLarge.copy(color = Color.Red))
             }
         }
@@ -112,7 +124,7 @@ fun ProductDetailsScreen(product: Product?, onBack: () -> Unit) {
                 painter = product.image,
                 contentDescription = null,
                 modifier = Modifier
-                    .size(200.dp)
+                    .size(300.dp)
                     .clip(RoundedCornerShape(16.dp))
             )
             Spacer(modifier = Modifier.height(16.dp))
@@ -122,7 +134,7 @@ fun ProductDetailsScreen(product: Product?, onBack: () -> Unit) {
             Spacer(modifier = Modifier.height(8.dp))
             Text(text = product.description, style = MaterialTheme.typography.bodyMedium, modifier = Modifier.padding(8.dp))
             Spacer(modifier = Modifier.height(16.dp))
-            Button(onClick = { }, modifier = Modifier.fillMaxWidth()) {
+            Button(onClick = { }, modifier = Modifier.fillMaxWidth(), colors = ButtonDefaults.buttonColors(containerColor = Color.Blue)) {
                 Text("Thêm vào giỏ hàng")
             }
             Spacer(modifier = Modifier.height(16.dp))
